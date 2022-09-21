@@ -9,7 +9,7 @@ function AddPostForm (props) {
             'title': event.target.title.value,
             'content': event.target.content.value
         }
-        await axios.post(`https://post-401.herokuapp.com/post`, post).then( () => {
+        await axios.post(`${process.env.REACT_APP_HEROKU_URL}`, post).then( () => {
             props.getData();
         } );
     };
