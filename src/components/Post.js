@@ -8,7 +8,7 @@ import React from 'react';
 function Post (props) {
     const [post, setPost] = useState([]);
     const getData = async () => {
-        const dataPost = await axios.get( `https://post-401.herokuapp.com/post`);
+        const dataPost = await axios.get( `${process.env.REACT_APP_HEROKU_URL}`);
         setPost(dataPost.data.post);
     };
 
