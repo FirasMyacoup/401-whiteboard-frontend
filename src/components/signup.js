@@ -2,36 +2,36 @@ import axios from "axios";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import "../App.css";
-
+import cookies from 'react-cookies';
 
 
 
 function Signup() {
-    const handleSubmit = async (e) => {
+    const handlesignUp = async (e) => {
         e.preventDefault();
-        if (e.target.password.value !== e.target.confirmPassword.value) {
-            alert('Passwords do not match');
-            return;
-        } else {
         const user = {
             'username': e.target.username.value,
             'password': e.target.password.value,
             'email': e.target.email.value,
+            'role': e.target.role.value
         };
         await axios.post(
             `${process.env.REACT_APP_HEROKU_URL}/signup`,user).then( (res) => {
             if (res.status === 200) {
-                window.location.href = '/posts';
+                cookies.save('token', res.data.token);
+                cookies.save('userID', res.data.userID);
+                cookies.save('username', user.username);
+                cookies.save('role', user.role);
+                window.location.href = '/post';
             } 
         }).catch( (err) => {
-            alert('Username or email are takken, please try again');
+            alert('Username or email already exists');
         } );
-    };
     };
     return (
         <>
         <div className="signup">
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handlesignUp}>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
                     <input type="text" className="form-control" id="username" name="username" />
@@ -48,8 +48,10 @@ function Signup() {
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" />
                 </div>
+                <p>Have an account? <a href="/signin">Sign in now</a></p>
+
+                <Button type="submit" className="btn-primary">SignUp</Button>
                 
-                <Button type="submit" className="btn btn-primary">Submit</Button>
                 </Form>
         </div>
         </>

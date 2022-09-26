@@ -17,7 +17,7 @@ function AddCommentForm ( props ) {
     return (
         <>
             <div className="add-comment-form">
-                <h2>Comment Something :)</h2>
+                <h2>post a comment here :)</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-control">
                         <textarea placeholder="Add Comment content" name="content"></textarea>
