@@ -2,106 +2,106 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import AddCommentForm from "./Add-comment-form";
-import AddPostForm from "./Add-post-form";
 import React from 'react';
 import cookies from 'react-cookies';
+
 
 function Post ( props ) {
     const [ post, setPost ] = useState( [] );
     const [edit,setEdit] = useState(false)
-    const getData  = async () => { 
-        await axios.get(`${process.env.REACT_APP_HEROKU_URL}/post` , {
-        headers: {
-            'Authorization': `Bearer ${cookies.load('token')}`
-        }    
+    const getData = async () => {
+        await axios.get( `${process.env.REACT_APP_HEROKU_URL}/post`, {
+            headers: {
+                Authorization: `Bearer ${cookies.load('token')}`
+            }
         })
-        .then( ( res ) => {
-            setPost( res.data );
-        } )
-        .catch( ( err ) => {
-            console.log( err );
-        } )
+            .then( ( res ) => {
+                setPost( res.data );
+            } ).catch( ( err ) => {
+                console.log( err );
+            } );
+
     };
 
     const handleDelete = async ( id ) => {
-        await axios.delete( `${process.env.REACT_APP_HEROKU_URL}/post/${id}` );
-        getData();
+        let confirm = prompt(" enter delete to confirm");
+        if(confirm === "delete"){
+            await axios.delete( `${process.env.REACT_APP_HEROKU_URL}/post/${id}` , {
+                headers: {
+                    'Authorization': `Bearer ${cookies.load('token')}`
+                }
+            } );
+            getData();
+        } else handleDelete()
     };
 
-
-    const handleEdit = async (e) => {
-        e.preventDefault();
-        const post = {
-            'title': e.target.title.value,
-            'content': e.target.content.value,
-            'userID': cookies.load('user').id
-        };
-        await axios.put(`${process.env.REACT_APP_HEROKU_URL}/post/${props.match.params.id}`, post, {
+    const handleEditForm = async (e,id) => {
+        e.preventDefault()
+        let title = e.target.title.value
+        let content = e.target.content.value
+        let obj = {
+            title,
+            content
+        }
+        await axios.put( `${process.env.REACT_APP_HEROKU_URL}/post/${id}`, obj , {
             headers: {
                 'Authorization': `Bearer ${cookies.load('token')}`
             }
-        })
-        .then(() => {
-            getData();
-        })
-        setEdit(false)
+        } )
+        setEdit(false);
+        getData();
     }
 
     useEffect( () => {
         getData();
-    }, [props.rerender] );
+    }, [ props.rerender ] );
     return (
-        <>
+        <>  
             {post && post.map( ( post, idx ) => {
                 return (
-                    <>
-                    <AddPostForm getPost={getData} />
-                    <div className="text">
-                         <div key={idx}>
+                    <div className="post-class" style={{ justifyContent: 'center', margin: '1rem' }} key={idx}>
                         <div className="card-body">
                             <h1 className="card-title">{post.title}</h1>
+                            <h3> Post by {post.user.username}</h3>
                             <p className="card-text">{post.content}</p>
-                    </div>
-                    {cookies.load('role') === 'admin' && <button onClick={() => handleDelete(post.id)}>Delete</button>}
-<                   button onClick={() => {
-                        setEdit(true)
-                    }}>Edit</button>
-                    {edit && <form onSubmit={handleEdit}>
-                        <input type="text" name="title" defaultValue={post.title} />
-                        <input type="text" name="content" defaultValue={post.content} />
-                        <button>Submit</button>
-                    </form>}
-                    
+                        </div>
+                        {cookies.load('role')=== 'admin' ? 
                         <div>
-                            {post.Comments && <h2>Comments</h2>}
-                            {post.Comments && post.Comments.map( ( comment, idx ) => {
+                            <button onClick={() => {
+                                handleDelete( post.id );
+                            }}>delete post</button>
+                            <button onClick={() => {
+                                setEdit(true) ;
+                            }}>Edit post</button>
+                    {edit && 
+                    <form onSubmit={(e) => handleEditForm(e,post.id)}>
+                        <h3>edit post</h3>
+                        <label htmlFor="title">New Title</label>
+                        <input type="text" name="title" id="title" />
+                        <label htmlFor="content">New Content</label>
+                        <input type="text" name="content" id="content" />
+                        <input type="submit" value="submit" />
+                    </form>}
+                        </div>
+                    : null}
+                        <div>
+                            {post.comments &&
+                                <h2>Comments</h2>
+                            }
+                            {post.comments && post.comments.map( ( comment, idx ) => {
                                 return (
                                     <div className="card" style={{ justifyContent: 'center', margin: '1rem' }} key={idx}>
                                         <div className="card-body">
+                                            <h3 className="card-title">comment by : {comment.user.username}</h3>
                                             <p className="card-text">{comment.content}</p>
                                         </div>
                                     </div>
                                 );
                             }
                             )}
-                              </div>
-                              <AddCommentForm postId={post.id} getData={getData} />
-                            <div>
-                            <button  onClick={() => {
-                                handleDelete( post.id );
-                            }}>delete post</button>
-                        </div>
-                        <button className="signout" onClick={() => {
-                            cookies.remove("token");
-                            cookies.remove("username");
-                            cookies.remove("userID");
-                            cookies.remove("role");
-                            window.location.replace = "/";
-                        }}>Sign Out {cookies.load('username')}</button>
-
+                            <AddCommentForm postId={post.id} getData={getData} />
                         </div>
                     </div>
-                    </>
                 );
             }
             )}
