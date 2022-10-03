@@ -2,45 +2,44 @@ import axios from "axios";
 import React from "react";
 import cookies from "react-cookies";
 
-function addPostForm ( props ) {
-    const handleSubmit = async ( e ) => {
+function addPostForm (props){
+    const handleAddPost = async (e) => {
         e.preventDefault();
         const post = {
             'title': e.target.title.value,
             'content': e.target.content.value,
-            'userID': cookies.load( 'user' ).id
-
+            'userID': cookies.load( 'user_id' ),
         };
         await axios.post(
-            `${process.env.REACT_APP_HEROKU_URL}/post`,post,{
+            `${process.env.REACT_APP_HEROKU_URL}/post`,
+            post, {
                 headers: {
-                    'Authorization': `Bearer ${cookies.load( 'token' )}`
-
+                    'Authorization': `bearer ${cookies.load('token')}`
+                }
             }
-        }
-            
-            ).then( () => {
+        ).then( () => {
             props.getData();
         } );
-
     };
+
+              
+
     return (
         <>
             <div className="add-post-form">
                 <h2>Add Post</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleAddPost}>
                     <div className="form-style">
-                        <label >Title</label>
-                        <input type="text" placeholder="Add title" name="title" />
+                        <label>Title</label>
+                        <input type="text" placeholder="Add your title" name="title" />
                     </div>
                     <div className="form-style">
                         <label>Content</label>
-                        <textarea placeholder="Add content here : " name="content"></textarea>
+                        <textarea placeholder="Add some content" name="content"></textarea>
                     </div>
-                    <div className="form-style1">
-                        <button>Submit</button>
-                        </div>
-                
+                    <div className="form-style">
+                        <input type="submit" />
+                    </div>
                 </form>
                 <button className="signout" onClick={() => {
                     cookies.remove('token');
@@ -54,4 +53,4 @@ function addPostForm ( props ) {
     );
 }
 
-export default addPostForm;
+export default addPostForm; 
