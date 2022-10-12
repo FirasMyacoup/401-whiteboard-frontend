@@ -1,39 +1,33 @@
-import axios from "axios";
 import React from "react";
-function addPostForm ( props ) {
-    const handleSubmit = async ( e ) => {
-        e.preventDefault();
-        const post = {
-            'title': e.target.title.value,
-            'content': e.target.content.value,
+import { useAuth } from "../Context/AuthContext";
+import { useUserData } from "../Context/PostContext";
 
-            'content': e.target.content.value,
-            'userId': props.userId
-        };
-        await axios.post(
-            `${process.env.REACT_APP_HEROKU_URL}/post`,post).then( () => {
-            props.getData();
-        } );
-    };
-    return (
-        <>
-            <div className="add-post-form">
-                <h2>Add Post</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-style">
-                        <label >Title</label>
-                        <input type="text" placeholder="Add your title" name="title" />
-                    </div>
-                    <div className="form-style">
-                        <label>Content</label>
-                        <textarea placeholder="Add some content" name="content"></textarea>
-                    </div>
-                    <div className="form-style1">
-                        <button>Submit</button>
-                        </div>
-                        </form>
+function AddPostForm() {
+const { user, clearUser } = useAuth();
+const { addPost } = useUserData();
+return (
+<>
+    <div className="add-post-form">
+        <h2>Add Post</h2>
+        <form onSubmit={(e) => addPost(e)}>
+            <div className="form-style">
+                <label>Title</label>
+                <input type="text" placeholder="Add Title" name="title" />
             </div>
-        </>
-    );
+            <div className="form-style">
+                <label>Content</label>
+                <textarea placeholder="Add Post content" name="content"></textarea>
+            </div>
+            <div className="form-style">
+                <input type="submit" />
+            </div>
+        </form>
+        <button className="signout" onClick={() => {
+            clearUser();
+        }}>Sign out {user.username}</button>
+    </div>
+</>
+);
 }
-export default addPostForm;
+
+export default AddPostForm;
