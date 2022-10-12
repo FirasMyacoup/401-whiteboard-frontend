@@ -1,38 +1,23 @@
-import AddPostForm from "./components/Add-post-form";
+
 import Post from "./components/Post";
-import './App.css';
-import React, {useEffect} from 'react';
-import { Else, If, Then, When } from "react-if";
-import { useAuth } from "./Context/AuthContext";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
+import AddPostForm from "./components/Add-post-form";
+import { useState} from "react";
 
 
 function App() {
-  const {isAuth, signup, checkSignIn} = useAuth()
-  useEffect( () => {
-    checkSignIn();
-  }, [] );
+  const [rerender, setRerender] = useState(false);
+  const handleRerender = () => {
+    setRerender(!rerender);
+  };
 
-  
   return (
     <div className="App">
-      <When condition={isAuth}>
-        <AddPostForm/>
-        <Post/>
-      </When>
-      <When condition={!isAuth}>
-        <If condition={signup}>
-          <Then>
-            <Signup/>
-          </Then>
-          <Else>
-            <Signin/>
-          </Else>
-        </If>
-      </When>
+          <AddPostForm getData={handleRerender}/>
+         <Post rerender={rerender} />
+        <AddPostForm />
+         <Post />
+
     </div>
   );
 }
-
 export default App;

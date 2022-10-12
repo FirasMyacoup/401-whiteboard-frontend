@@ -1,27 +1,36 @@
+import axios from "axios";
 import React from 'react';
-import { useAuth } from "../Context/AuthContext";
-import { useUserData } from "../Context/PostContext";
+import cookies from "react-cookies";
 
 
 function AddCommentForm ( props ) {
-    const { user, clearUser, setIsAuth } = useAuth();
-    const { addComment } = useUserData();
+    const handleSubmit = async ( e ) => {
+    const handleComment = async ( e ) => {
+        e.preventDefault();
+        const comment = {
+            'content': e.target.content.value,
+            'postId': props.postId
+        };
+        await axios.post(
+            `${process.env.REACT_APP_HEROKU_URL}/comment/${props.postId}`,comment
+        ).then( () => {
+            `${process.env.REACT_APP_HEROKU_URL}/comment/${props.postId}`,comment).then( () => {
+            props.getData();
+        } );
+    };
     return (
         <>
             <div className="add-comment-form">
-                <h2>Add Comment</h2>
-                <form onSubmit={(e, postId) => addComment(e, props.postId)}>
+                <h2>Comment here</h2>
+                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleComment}>
                     <div className="form-control">
-                    <textarea placeholder="Add Comment content" name="content"></textarea>
+                        <textarea placeholder="Add Comment" name="content"></textarea>
                     </div>
                     <div className="form-control">
                         <input type="submit" />
                     </div>
                 </form>
-                <button className="signout" onClick={() => {
-                            clearUser();
-                            setIsAuth( false );
-                        }}>Sign out {user.username}</button>
             </div>
         </>
     );

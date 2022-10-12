@@ -1,23 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Signup from './components/Signup';
 import Signin from './components/Signin';
-import cookies from 'react-cookies';
-import AuthContextProvider from './Context/AuthContext';
-import UserDataContextProvider from './Context/PostContext';
+
 
 
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 root.render(
-  <AuthContextProvider>
-    <UserDataContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        {cookies.load( 'token' ) ? <Route path='/posts' element={<App />} /> : <Route path='/posts' element={<Signin />} />}
-      </Routes>
-    </BrowserRouter>
-    </UserDataContextProvider>
-  </AuthContextProvider>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Signin />} />
+      <Route path='/signin' element={<Signin />} />
+      <Route path='/signup' element={<Signup />} />
+      <Route  path='/posts' element={<App />} /> : <Route  path='/posts' element={<Signin />} />
+    </Routes>
+  </BrowserRouter>
 );
+reportWebVitals();
