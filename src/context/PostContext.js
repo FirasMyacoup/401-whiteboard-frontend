@@ -59,7 +59,7 @@ const PostContextProvider = ( props ) => {
     };
 
     const deletePost = async ( id ) => {
-        let confirm = prompt( "type delete" );
+        let confirm = prompt( "type delete please" );
         if ( confirm === "delete" ) {
             await axios.delete( `${process.env.REACT_APP_HEROKU_URL}/post/${id}/${user.user_id}`, {
                 headers: {
@@ -79,7 +79,7 @@ const PostContextProvider = ( props ) => {
             `${process.env.REACT_APP_HEROKU_URL}/comment/${postId}/${user.user_id}`,
             comment
         ).then( () => {
-            console.log( 'comment has been added' );
+            console.log( 'comment added' );
         } );
     };
 
