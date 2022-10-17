@@ -8,11 +8,11 @@ function AddCommentForm ( props ) {
     const { addComment } = useUserData();
     return (
         <>
-            <div className="add-comment-form">
+            <div>
                 <h2>Add Comment</h2>
                 <form onSubmit={(e, postId) => addComment(e, props.postId)}>
                     <div className="form-control">
-                    <textarea placeholder="Add Comment content" name="content"></textarea>
+                    <textarea placeholder="Add Comment" name="content"></textarea>
                     </div>
                     <div className="form-control">
                         <input type="submit" />

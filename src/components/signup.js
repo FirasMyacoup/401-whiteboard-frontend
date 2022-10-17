@@ -32,7 +32,7 @@ function Signup () {
                 </div>
                 <button type="submit" >Signup</button>
             </form>
-            <p>Already have an account? <Link to ="/" onClick={() => {setSignup(false)}}>Sign in now</Link></p>
+            <p>Already have an account? <Link to ="/" onClick={() => {setSignup(false)}}>Sign in</Link></p>
         </div>
     );
 }

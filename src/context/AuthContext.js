@@ -58,7 +58,7 @@ const AuthContextProvider = ( props ) => {
     const handleSignUp = async ( e ) => {
         e.preventDefault();
         if ( e.target.password.value !== e.target.confirmPassword.value ) {
-            swal( 'Passwords do not match' );
+            swal( "Passwords don't match");
             return;
         } else {
             const userObject = {

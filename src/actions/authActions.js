@@ -1,5 +1,5 @@
 import axios from "axios";
-import { actionType } from '../configurations/constant';
+
 
 export const signin = ( dispatch, payload ) => {
     
