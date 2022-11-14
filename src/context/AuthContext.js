@@ -3,6 +3,7 @@ import axios from "axios";
 import base64 from "base-64";
 import cookies from "react-cookies";
 import swal from 'sweetalert';
+import React, { Component }  from 'react';
 
 const AuthContext = createContext();
 export const useAuth = () => useContext( AuthContext );

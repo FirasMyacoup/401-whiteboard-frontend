@@ -2,8 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Signin from '../components/Signin';
 import Signup from '../components/Signup';
 import Post from '../components/Post';
-import { AuthContextProvider } from '../Context/AuthContext';
-import { PostContextProvider } from '../Context/PostContext';
+import { AuthContextProvider } from '../context/AuthContext';
+import { PostContextProvider } from '../context/PostContext';
 
 
 test( 'renders Signin', () => {
