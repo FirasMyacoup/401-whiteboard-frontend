@@ -1,28 +1,24 @@
 import React from 'react';
-import { useAuth } from "../Context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useUserData } from "../Context/PostContext";
+import { Stack, HStack, VStack } from "@chakra-ui/react"
 
 
 function AddCommentForm ( props ) {
-    const { user, clearUser, setIsAuth } = useAuth();
     const { addComment } = useUserData();
     return (
         <>
-            <div>
-                <h2>Add Comment</h2>
-                <form onSubmit={(e, postId) => addComment(e, props.postId)}>
-                    <div className="form-control">
-                    <textarea placeholder="Add Comment" name="content"></textarea>
-                    </div>
-                    <div className="form-control">
+            <Stack className="add-comment-form">
+                <form onSubmit={( e ) => addComment( e, props.postId )}>
+                    <VStack>
+                        <label>Comment</label>
+                        <textarea placeholder="Add Comment" name="content"></textarea>
                         <input type="submit" />
-                    </div>
+                    </VStack>
                 </form>
-                <button className="signout" onClick={() => {
-                            clearUser();
-                            setIsAuth( false );
-                        }}>Sign out {user.username}</button>
-            </div>
+            </Stack>
+
+
         </>
     );
 }

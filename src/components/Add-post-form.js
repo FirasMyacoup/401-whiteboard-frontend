@@ -1,33 +1,29 @@
 import React from "react";
-import { useAuth } from "../Context/AuthContext";
-import { useUserData } from "../Context/PostContext";
+import { useAuth } from "../context/AuthContext";
+import { useUserData } from "../context/PostContext";
+import { Stack, HStack, VStack } from "@chakra-ui/react"
 
-function AddPostForm() {
-const { user, clearUser } = useAuth();
-const { addPost } = useUserData();
-return (
-<>
-    <div className="add-post-form">
-        <h2>Add Post</h2>
-        <form onSubmit={(e) => addPost(e)}>
-            <div className="form-style">
-                <label>Title</label>
-                <input type="text" placeholder="Add Title" name="title" />
-            </div>
-            <div className="form-style">
-                <label>Content</label>
-                <textarea placeholder="Add Post content" name="content"></textarea>
-            </div>
-            <div className="form-style">
-                <input type="submit" />
-            </div>
-        </form>
-        <button className="signout" onClick={() => {
-            clearUser();
-        }}>Sign out {user.username}</button>
-    </div>
-</>
-);
+function AddPostForm () {
+    const { user, clearUser } = useAuth();
+
+    const { addPost } = useUserData();
+    return (
+        <>
+            <Stack className="add-post-form">
+                <form onSubmit={( e ) => addPost( e )}>
+                    <VStack>
+                        <label>Title</label>
+                        <input type="text" name="title" />
+                        <label>Content</label>
+                        <textarea name="content"></textarea>
+                        <input type="submit" />
+                    </VStack>
+                </form>
+                <button onClick={() => clearUser()}>Logout</button>
+            </Stack>
+
+        </>
+    );
 }
 
 export default AddPostForm;

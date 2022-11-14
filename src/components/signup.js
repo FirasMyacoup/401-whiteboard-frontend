@@ -1,40 +1,110 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
+import React from 'react';
+import {
+  Flex,
+  Heading,
+  Input,
+  Button,
+  FormControl,
+  FormLabel,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { Select } from '@chakra-ui/react'
+
 
 function Signup () {
-    const { handleSignUp, setSignup } = useAuth();
+     const { handleSignUp, setSignup } = useAuth();
+    
+   
     return (
-        <div className="signup">
-            <h1>Sign Up</h1>
-            <form onSubmit={( e ) => handleSignUp( e )}>
-                <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name="username" id="username" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="text" name="password" id="password" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="confirmPassword">Confirm your Password</label>
-                    <input type="text" name="confirmPassword" id="confirmPassword" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="role">Role</label>
-                    <select name="role">
-                        <option value="user" defaultValue='user'>USER</option>
-                        <option value="admin">ADMIN</option>
-                    </select>
-                </div>
-                <button type="submit" >Signup</button>
-            </form>
-            <p>Already have an account? <Link to ="/" onClick={() => {setSignup(false)}}>Sign in</Link></p>
-        </div>
+        <Flex
+            align={'center'}
+            justify={'center'}
+           
+        >
+            <Flex
+                direction={'column'}
+                bg={formBackground}
+                
+            >
+                <Heading textAlign={'center'} size={'lg'} fontWeight={'normal'}>
+                    Sign up for an account
+                </Heading>
+                <form onSubmit={handleSignUp}>
+                    <FormControl mt={6}>
+                        <FormLabel>Username</FormLabel>
+                        <Input
+                            type="text"
+                            name="username"
+                            placeholder="username"
+                            required
+                        />
+                    </FormControl>
+                    <FormControl mt={6}>
+                        <FormLabel>Email address</FormLabel>
+                        <Input
+                            type="email"
+                            name="email"
+                            placeholder="email"
+                            required
+                        />
+                    </FormControl>
+                    <FormControl mt={6}>
+                        <FormLabel>Password</FormLabel>
+                        <Input
+                            type="password"
+                            name="password"
+                            placeholder="password"
+                            required
+                        />
+                    </FormControl>
+                    <FormControl mt={6}>
+                        <FormLabel>Confirm Password</FormLabel>
+                        <Input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="confirm password"
+                            required
+                        />
+                    </FormControl>
+                    <FormControl mt={6}>
+                        <FormLabel>Role</FormLabel>
+                        <Select name="role" placeholder="Select option">
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </Select>
+                    </FormControl>
+                    <Button
+                        type="submit"
+                        mt={4}
+                        w={'full'}
+                        bgGradient="linear(to-r, white.500,blue.500)"
+                        color={'white'}
+                        _hover={{
+                            bgGradient: 'linear(to-r, red.500,yellow.500)',
+                            boxShadow: 'xl',
+                        }}
+                    >
+                        Sign up
+                    </Button>
+                </form>
+                <Button
+                    mt={4}
+                    w={'full'}
+                    color={'white'}
+                    _hover={{
+                        bgGradient: 'linear(to-r, green.500,blue.500)',
+                    }}
+                     onClick={() => setSignup( false )} 
+                >
+                    Cancel
+                </Button>
+        
+            </Flex>
+        </Flex>
     );
-}
+};
+
 
 export default Signup;

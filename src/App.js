@@ -2,6 +2,7 @@
 import Post from "./components/Post";
 import AddPostForm from "./components/Add-post-form";
 import { useState} from "react";
+import React, { Component }  from 'react';
 
 
 function App() {
