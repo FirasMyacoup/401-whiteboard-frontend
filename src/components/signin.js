@@ -1,63 +1,63 @@
-import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
-import React from 'react';
-import {
-  Flex,
-  Heading,
-  Input,
-  Button,
-  FormControl,
-  FormLabel,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import React from "react";
+import {Flex,Heading,Input,Button,FormControl,FormLabel,useColorModeValue,useColorMode,Switch} from "@chakra-ui/react";
 
-function Signin () {
-    const { handleSignIn, setSignup } = useAuth();
-    const formBackground = useColorModeValue('gray.100', 'gray.700');
+function Signin() {
+ const { handleSignIn, setSignup } = useAuth();
+ const { toggleColorMode } = useColorMode();
 
-   
+ return (
+  <Flex
+   align={"center"}
+   justify={"center"}
+  >
+   <Flex
+    direction={"column"}
+    p={12}
+   >
+    <Heading textAlign={"center"} fontSize={"6xl"}>
+     Sign in
+    </Heading>
+    <form onSubmit={handleSignIn}>
+     <FormControl mt={6}>
+      <FormLabel>Username</FormLabel>
+      <Input name="username" placeholder="username" />
+     </FormControl>
+     <FormControl mt={6}>
+      <FormLabel>Password</FormLabel>
+      <Input name="password" type="password" placeholder="password" />
+     </FormControl>
+     <Button
+      type="submit"
+      width={"full"}
+      color={"blue"}
+     >
+      Sign in
+     </Button>
+    </form>
+    <Button
+     mt={4}
+     w={"full"}
+     color={"white"}
+     onClick={() => setSignup(true)}
+    >
+     Sign up here 
+    </Button>
 
-    return (
-        <Flex
-            minH={'100vh'}
-            align={'center'}
-            bg={useColorModeValue('green.50', 'whiteAlpha.600')}>
-            <Flex
-                bg={formBackground}
-                boxShadow={'lg'}
-                p={12}>
-                <Heading textAlign={'center'} fontSize={'medium'}>
-                    Sign in
-                </Heading>
-                <form onSubmit={handleSignIn}>
-                    <FormControl mt={6}>
-                        <FormLabel>Username</FormLabel>
-                        <Input name="username" placeholder="username" />
-                    </FormControl>
-                    <FormControl mt={6}>
-                        <FormLabel>Password</FormLabel>
-                        <Input name="password" type="password" placeholder="password" />
-                    </FormControl>
-                    <Button type="submit">
-                        Sign in
-                    </Button>
-                </form>
-                <Button
-                    mt={6}
-                    color={'blue'}
-                
-                    onClick={() => setSignup(true)}>
-                    Sign up
-                </Button>
-                
-
-                
-            </Flex>
-        </Flex>
-    );
-
+    <FormControl display="flex" alignItems="center">
+     <FormLabel htmlFor="dark_mode" mb="0">
+      Enable Dark Mode?
+     </FormLabel>
+     <Switch
+      id="dark_mode"
+      colorScheme="teal"
+      size="lg"
+      onChange={toggleColorMode}
+     />
+    </FormControl>
+   </Flex>
+  </Flex>
+ );
 }
 
-
-    
 export default Signin;
