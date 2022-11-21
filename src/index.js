@@ -1,22 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Signup from './components/signup';
 import Signin from './components/signin';
+import cookies from 'react-cookies';
+import AuthContextProvider from './Context/AuthContext';
+import UserDataContextProvider from './Context/PostContext';
+import { ChakraProvider, DarkMode, LightMode } from '@chakra-ui/react';
+import { myNewTheme } from "../src/theme/theme";
+import  store  from '../src/redux/store';
+import { Provider } from 'react-redux';
+
 
 
 
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Signin />} />
-      <Route path='/signin' element={<Signin />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route  path='/posts' element={<App />} /> : <Route  path='/posts' element={<Signin />} />
-    </Routes>
-  </BrowserRouter>
+ <Provider store={store}>
+  <ChakraProvider theme={myNewTheme}>
+  <AuthContextProvider>
+    <UserDataContextProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        {cookies.load( 'token' ) ? <Route path='/posts' element={<App />} /> : <Route path='/posts' element={<Signin />} />}
+      </Routes>
+    </BrowserRouter>
+    </UserDataContextProvider>
+  </AuthContextProvider>
+  </ChakraProvider>
+  </Provider>
 );
-reportWebVitals();
