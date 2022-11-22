@@ -50,11 +50,8 @@ textAlign="center"
 
 <VStack>
 <Box
-w="auto%"
-h="auto%"
-fontSize="l"
-fontWeight="normal"
-lineHeight="normal"
+width="auto%"
+height="auto%"
 textAlign="center"
 
 >
