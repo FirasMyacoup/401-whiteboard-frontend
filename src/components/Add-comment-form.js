@@ -10,7 +10,7 @@ function AddCommentForm(props) {
     <form onSubmit={(e) => addComment(e, props.postId)}>
      <VStack>
       <Textarea placeholder="Comment" name="content"></Textarea>
-      <Button type="submit">Add Comment</Button>
+      <Button type="submit">Comment</Button>
      </VStack>
     </form>
    </Stack>

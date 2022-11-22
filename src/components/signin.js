@@ -39,22 +39,11 @@ function Signin() {
      mt={4}
      w={"full"}
      color={"white"}
-     onClick={() => setSignup(true)}
-    >
-     Sign up here 
-    </Button>
+     onClick={() => setSignup(true)}>
+     Sign up </Button>
 
     <FormControl display="flex" alignItems="center">
-     <FormLabel htmlFor="dark_mode" mb="0">
-      Enable Dark Mode?
-     </FormLabel>
-     <Switch
-      id="dark_mode"
-      colorScheme="teal"
-      size="lg"
-      onChange={toggleColorMode}
-     />
-    </FormControl>
+    </FormControl>                                                                          
    </Flex>
   </Flex>
  );

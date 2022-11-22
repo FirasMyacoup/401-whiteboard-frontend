@@ -29,6 +29,6 @@ export const authReducer = (state, action) => {
     isAuth: false,
    };
   default:
-   throw new Error(`A nonhandled action type: ${action.type}`);
+   throw new Error(`A none handled action type: ${action.type}`);
  }
 };

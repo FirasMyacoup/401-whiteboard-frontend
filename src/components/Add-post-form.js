@@ -22,7 +22,7 @@ function AddPostForm() {
       <Input placeholder="Title" name="title" />
       <FormLabel>Content</FormLabel>
       <Textarea placeholder="Content" name="content"></Textarea>
-      <Button type="submit">Add Post</Button>
+      <Button type="submit">Post</Button>
      </VStack>
     </form>
     <Button onClick={() => clearUser()}>Logout</Button>
