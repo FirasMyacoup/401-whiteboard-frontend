@@ -1,73 +1,77 @@
-import { extendTheme } from "@chakra-ui/react";
+// import { extendTheme } from "@chakra-ui/react";
 
-export const myNewTheme = extendTheme({
-    components: {
-        Button: {
-            baseStyle: {
-                fontWeight: "bold", 
-            },
-            sizes: {
-                lg: {
-                    h: "56px",
-                    fontSize: "lg",
-                    px: "32px",
-                },
-            },
-            variants: {
-                solid: (props) => ({
-                    bg: props.colorMode === "dark" ? "lightblue.300" : "blue.500",
-                }),
-            },
-            defaultProps: {
-                size: "lg",
-                variant: "solid",
-            },
-        },
-    },
+// export const myNewTheme = extendTheme({
+// components: {
+// Button: {
+// baseStyle: {
+// fontWeight: "bold", 
+// },
+// sizes: {
+// lg: {
+// h: "50px",
+// fontSize: "large",
+// px: "35px",
+// },
+// },
+// variants: {
+// solid: (props) => ({
+// bg: props.colorMode === "dark" ? "lightblue.300" : "blue.500",
+// }),
+// },
+// defaultProps: {
+// size: "large",
+// variant: "solid",
+// },
+// },
+// },
 
-    colors: {
-        primary: {
-            50: "#E7D2CC",
-            100: "#B9B7BD",
-            200: "#868B8E",
-            300: "#EEEDE7",
-            400: "#746C70",
-            500: "#647C90",
-        },
-    },
+// colors: {
+// primary: {
+// 50: "#F0EBE3",
+// 100: "#E4DCCF",
+// 200: "#7D9D9C",
+// 300: "#576F72",
+// 400: "#C539B4",
+// 500: "#852999",
+// },
+// },
 
-    Heading: {
-        baseStyle: {
-            fontWeight: "bold",
-        },
-    },
-    FormLabel: {
-        baseStyle: {
-            fontWeight: "bold",
-        },
-        sizes: {
-            lg: {
-               
-                fontSize:"15px",
-                px: "35px",
-            },
-        },
-       
-        defaultProps: {
-            size: "lg",
-            variant: "solid",
-        },
-    
-    },
-    styles: {
-        global: (props) => ({
-            body: {
-                color: props.colorMode === "dark" ? "white" : "blue.400",
-                lineHeight: "base"
-            },
-        }),
-    },
+// Heading: {
+// baseStyle: {
+// },
+// },
+// FormLabel: {
+// baseStyle: {
+// },
+// sizes: {
+// lg: {
+// h: "56px",
+// fontSize: "lg",
+// px: "32px",
+// },
+// },
+// variants: {
+// solid: (props) => ({
+// bg: props.colorMode === "dark" ? "red.400" : "red.650",
+// }),
+// },
+// defaultProps: {
+// size: "lg",
+// variant: "solid",
+// },
+
+// },
+// styles: {
+// global: (props) => ({
+// body: {
+// color: props.colorMode === "dark" ? "white" : "lightblue.800",
+// bg: props.colorMode === "dark" ? "lightblue.800" : "white",
+// lineHeight: "base",
+// fontFamily: "body",
+// },
+// }),
+// },
 
 
 
-})
+// })
