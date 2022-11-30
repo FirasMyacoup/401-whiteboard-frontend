@@ -14,6 +14,6 @@ export const postReducer = (state, action) => {
     error: action.payload,
    };
   default:
-   throw new Error(`A none handled action type: ${action.type}`);
+   throw new Error(`none handled action type: ${action.type}`);
  }
 };
