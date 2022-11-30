@@ -25,7 +25,7 @@ function AddPostForm() {
       <Button type="submit">Add Post</Button>
      </VStack>
     </form>
-    <Button onClick={() => clearUser()}>Logout</Button>
+    <Button onClick={() => clearUser()}>Logoutt</Button>
    </Stack>
   </>
  );
