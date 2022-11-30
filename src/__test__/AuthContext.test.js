@@ -1,21 +1,21 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import Signin from "../components/signin";
-import Signup from "../components/signup";
+import Signin from "../components/Signin";
+import Signup from "../components/Signup";
 import Post from "../components/Post";
-import { AuthContextProvider } from "../Context/AuthContext";
-import { PostContextProvider } from "../Context/PostContext";
+import { AuthContextProvider } from "../context/AuthContext";
+import { PostContextProvider } from "../context/PostContext";
 
-test("renders Signin", () => {
+test("renders the Signin", () => {
  render(
   <AuthContextProvider>
-   <Signin />
+   <Signin/>
   </AuthContextProvider>
  );
  const linkElement = screen.getByText(/Signin/i);
  expect(linkElement).toBeInTheDocument();
 });
 
-test("renders Signup", () => {
+test("renders the Signup", () => {
  render(
   <AuthContextProvider>
    <Signup />
@@ -29,7 +29,7 @@ test("renders Post", () => {
  render(
   <AuthContextProvider>
    <PostContextProvider>
-    <Post />
+    <Post/>
    </PostContextProvider>
   </AuthContextProvider>
  );
